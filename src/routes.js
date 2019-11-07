@@ -1,12 +1,13 @@
 const express = require('express');
 
-const SessionController = require('./controllers/SessionController');
+const AuthController = require('./controllers/authController');
 const ChannelController = require('./controllers/channelController');
 const GroupController = require('./controllers/groupController');
 
 const routes = express.Router();
 
-routes.post('/sessions', SessionController.store);
+routes.post('/auth', AuthController.store);
 routes.post('/channels', ChannelController.store);
-routes.get('/groups/:groupId/channels', GroupController.store);
+routes.get('/groups/:groupId/channels', GroupController.show);
+routes.get('/groups/:groupId/channels/pinned', GroupController.index);
 module.exports = routes;

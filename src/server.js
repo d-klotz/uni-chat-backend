@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const mongoose = require('mongoose');
 const routes = require('./routes');
 const socketio = require('socket.io');
 const http = require('http');
@@ -8,6 +9,11 @@ const http = require('http');
 const app = express();
 const server = http.Server(app);
 const io = socketio(server);
+
+mongoose.connect('mongodb://uni-chat:uni-chat@uni-chat-shard-00-00-vuceq.mongodb.net:27017,uni-chat-shard-00-01-vuceq.mongodb.net:27017,uni-chat-shard-00-02-vuceq.mongodb.net:27017/test?ssl=true&replicaSet=uni-chat-shard-0&authSource=admin&retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const connectedUsers = {};
 
