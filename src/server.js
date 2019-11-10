@@ -19,8 +19,8 @@ const connectedUsers = {};
 
 // Creates the socket.io connection for real time actions
 io.on('connection', socket => {
-  const { userId } = socket.handshake.query;
-  connectedUsers[userId] = socket.id;
+  const { username } = socket.handshake.query;
+  connectedUsers[username] = socket.id;
 
   socket.on('join', user => {
     io.emit(
@@ -28,13 +28,12 @@ io.on('connection', socket => {
     {
         emitter: 'Bot', 
         room: 'general', 
-        content: `${user} joined the chat`
+        content: `${username} joined the chat`
       }
     );
   });
 
   socket.on('createMessage', message => {
-    console.log(message);
     if (message.content !== '') {
       io.emit('newMessage', message);
     }

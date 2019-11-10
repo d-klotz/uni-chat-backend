@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  id: String,
+  googleAuthId: String,
   name: String,
   lastname: String,
   email: String,
-  nickname: String,
+  username: String,
   Groups: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group'
