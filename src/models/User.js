@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   lastname: String,
   email: String,
   username: String,
-  Groups: [{
+  groups: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group'
   }]
