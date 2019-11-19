@@ -1,5 +1,6 @@
 const axios = require('axios');
 const User = require('../models/User');
+const Group = require('../models/Group');
 
 module.exports = {
   async store(req, res) {
@@ -22,8 +23,16 @@ module.exports = {
         let user = await User.findOne({ googleAuthId: response.data.localId });
         
         if (!user) {
-          user = await User.create({ googleAuthId: response.data.localId, email: email, username: username });
-        }
+          await Group.findOne({ name: 'Unichat community' })
+            .then(async res => {
+              user = await User.create({
+                googleAuthId: response.data.localId, 
+                email: email, 
+                username: username,
+                groups: [res._id]
+              });
+            })
+        }          
         
         const data = {
           expirationDate : new Date(new Date().getTime() + response.data.expiresIn * 1000),
@@ -34,6 +43,8 @@ module.exports = {
           email: user.email,
           username: user.username
         }
+
+        console.log('User logged in', user);
         
         return res.status(200).send(data);
     
