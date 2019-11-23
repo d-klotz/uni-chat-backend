@@ -6,6 +6,7 @@ const routes = require('./routes');
 const socketio = require('socket.io');
 const http = require('http');
 const populateInititalData = require('./db/inititalScripts');
+const messageController = require('./controllers/messageController'); 
 
 const app = express();
 const server = http.Server(app);
@@ -21,6 +22,14 @@ populateInititalData();
 
 const connectedUsers = {};
 
+// adds socket.io to a middleware, so the params and the connected users 
+//are available in the whole app.
+app.use((req, res, next) => {
+  req.io = io;
+  req.connectedUsers = connectedUsers;
+  return next();
+});
+
 // Creates the socket.io connection for real time actions
 io.on('connection', socket => {
   const { username } = socket.handshake.query;
@@ -30,8 +39,8 @@ io.on('connection', socket => {
     io.emit(
       'newMessage', 
     {
-        emitter: 'Bot', 
-        room: 'general', 
+        emitter: 'Unichat Bot', 
+        room: 'general',
         content: `${username} joined the chat`
       }
     );
@@ -39,17 +48,11 @@ io.on('connection', socket => {
 
   socket.on('createMessage', message => {
     if (message.content !== '') {
-      io.emit('newMessage', message);
+      message.timestamp = new Date();
+      messageController.store(message);
+      io.emit('newMessage', message); 
     }
   });
-});
-
-// adds socket.io to a middleware, so the params and the connected users 
-//are available in the whole app.
-app.use((req, res, next) => {
-  req.io = io;
-  req.connectedUsers = connectedUsers;
-  return next();
 });
 
 app.use(cors());
