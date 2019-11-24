@@ -35,15 +35,17 @@ io.on('connection', socket => {
   const { username } = socket.handshake.query;
   connectedUsers[username] = socket.id;
 
-  socket.on('join', user => {
-    io.emit(
-      'newMessage', 
-    {
-        emitter: 'Unichat Bot', 
-        room: 'general',
-        content: `${username} joined the chat`
-      }
-    );
+  socket.on('join', groupId => {
+    const message = {
+      emitter: 'Unichat Bot', 
+      room: 'general',
+      timestamp: new Date(),
+      group: groupId,
+      content: `${username} joined the chat`
+    }
+
+    messageController.store(message);
+    io.emit('newMessage', message);
   });
 
   socket.on('createMessage', message => {
