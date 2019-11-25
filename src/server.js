@@ -33,8 +33,7 @@ app.use((req, res, next) => {
 // Creates the socket.io connection for real time actions
 io.on('connection', socket => {
   const { username } = socket.handshake.query;
-  connectedUsers[username] = socket.id;
-
+  
   socket.on('join', groupId => {
     const message = {
       emitter: 'Unichat Bot', 
@@ -44,9 +43,17 @@ io.on('connection', socket => {
       content: `${username} joined the chat`
     }
 
+    connectedUsers[username] = socket.id;
+    io.emit('onlineUsers', connectedUsers);
+
     messageController.store(message);
-    io.emit('newMessage', message);
+    io.emit('newMessage', message);    
   });
+
+  socket.on('disconnect', () => {
+    delete connectedUsers[username];
+    io.emit('onlineUsers', connectedUsers);
+  })
 
   socket.on('createMessage', message => {
     if (message.content !== '') {

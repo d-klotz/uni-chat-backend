@@ -43,8 +43,6 @@ module.exports = {
           email: user.email,
           username: user.username
         }
-
-        console.log('User logged in', user);
         
         return res.status(200).send(data);
     
