@@ -18,7 +18,7 @@ module.exports = {
       returnSecureToken: true
     };
 
-    const response = axios.post(url, authData)
+    axios.post(url, authData)
       .then(async response => {
         let user = await User.findOne({ googleAuthId: response.data.localId });
         
@@ -48,8 +48,7 @@ module.exports = {
     
       })
       .catch(error => {
-        return res.status(404).send({ error: error });
+        return res.status(400).send(error.response.data.error);
       });
-    return response;
   }
 };
