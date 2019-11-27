@@ -10,6 +10,7 @@ const routes = express.Router();
 routes.post('/auth', AuthController.store);
 routes.get('/users/:userId', UserController.update);
 routes.get('/users/:userId/groups', UserController.groups);
-routes.get('/groups/:groupId/', GroupController.show);
+routes.get('/groups/:groupId/', GroupController.index);
+routes.get('/groups', GroupController.show);
 routes.get('/messages/:groupId/', MessageController.show);
 module.exports = routes;
