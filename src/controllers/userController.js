@@ -39,5 +39,16 @@ module.exports = {
     await user.populate('groups').execPopulate();
 
     return res.status(200).send({groups: user.groups});
+  },
+
+  async show (req, res) {
+    
+    const users = await User.find().limit(20);
+        
+    if (!users) {
+      return res.status(400).json({ error: 'No users found'});
+    }
+
+    return res.status(200).send({users: users});
   }
 }
