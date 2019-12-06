@@ -6,6 +6,7 @@ module.exports = {
     await Message.create({
       content: messageData.content,
       room: messageData.room,
+      emitterId: messageData.emitterId,
       emitter: messageData.emitter,
       group: messageData.group
     });

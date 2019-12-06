@@ -35,8 +35,10 @@ io.on('connection', socket => {
   const { username } = socket.handshake.query;
   
   socket.on('join', groupId => {
+    //to do: Remove join message
     const message = {
-      emitter: 'Unichat Bot', 
+      emitter: 'Unichat Bot',
+      emitterId: 6969696969,
       room: 'general',
       timestamp: new Date(),
       group: groupId,
