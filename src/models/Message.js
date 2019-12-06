@@ -6,6 +6,7 @@ const MessageSchema = new mongoose.Schema({
     ref: 'Group'
   },
   room: String,
+  emitterId: String,
   emitter: String,
   content: String,
   timestamp: { type : Date, default: Date.now }

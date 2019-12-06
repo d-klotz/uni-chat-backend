@@ -4,11 +4,15 @@ module.exports = {
   async index(req, res) {
     const { userId } = req.params;
 
-    const user = await User.findOne({ _id: userId });
-        
-    if (!user) {
-      return res.status(400).json({ error: 'User does not exist'});
+    let user;
+    try {
+      user = await User.findOne({ _id: userId });
+    } catch (error) {
+      if (!user) {
+        return res.status(400).json({ error: 'User does not exist'});
+      }
     }
+        
     return res.status(200).send({user});
   },
 
