@@ -31,7 +31,7 @@ module.exports = {
     return res.status(200).send({ exist: true });
   },
 
-  async groups (req, res) {    
+  async groups (req, res) {
     const { userId } = req.params;
     
     const user = await User.findOne({ _id: userId });
@@ -54,5 +54,15 @@ module.exports = {
     }
 
     return res.status(200).send({users: users});
+  },
+
+  async patch(req, res) {
+    const { userId } = req.params;
+    const query = req.body;
+
+    await User.findOneAndUpdate({ _id: userId }, query, { upsert: true }, function (error, user) {
+      if (error) return res.send({ error }).status(500);
+      return res.send({ user }).status(200);
+    });
   }
 }

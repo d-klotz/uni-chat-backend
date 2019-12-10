@@ -29,7 +29,8 @@ module.exports = {
                 googleAuthId: response.data.localId, 
                 email: email, 
                 username: username,
-                groups: [res._id]
+                groups: [res._id],
+                themeName: 'darkTheme'
               });
             })
         }          
@@ -41,7 +42,8 @@ module.exports = {
           expiresIn : response.data.expiresIn,
           userId: user._id,
           email: user.email,
-          username: user.username
+          username: user.username,
+          themeName: user.themeName
         }
         
         return res.status(200).send(data);
