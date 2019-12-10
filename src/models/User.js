@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
   groups: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group'
-  }]
+  }],
+  themeName: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

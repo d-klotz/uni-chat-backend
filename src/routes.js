@@ -10,6 +10,7 @@ const routes = express.Router();
 routes.post('/auth', AuthController.store);
 routes.get('/users/', UserController.show);
 routes.get('/users/:userId', UserController.index);
+routes.patch('/users/:userId', UserController.patch);
 routes.get('/users/checkusername/:username', UserController.check);
 routes.get('/users/:userId/groups', UserController.groups);
 routes.get('/groups/:groupId/', GroupController.index);
