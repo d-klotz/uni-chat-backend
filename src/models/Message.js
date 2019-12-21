@@ -8,7 +8,10 @@ const MessageSchema = new mongoose.Schema({
   room: String,
   emitterId: String,
   emitter: String,
-  content: String,
+  content: { 
+    type : { type : String }, 
+    value: { type : String }
+  },
   timestamp: { type : Date, default: Date.now }
 });
 

@@ -42,7 +42,10 @@ io.on('connection', socket => {
       room: 'general',
       timestamp: new Date(),
       group: groupId,
-      content: `${username} joined the chat`
+      content: {
+        type: 'text',
+        value: `${username} joined the chat`
+      }
     }
 
     connectedUsers[username] = socket.id;
