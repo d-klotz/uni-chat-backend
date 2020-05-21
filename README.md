@@ -1,12 +1,20 @@
 <h1 align="center">Group chat NodeJs backend</h1>
 
+### :collision: Tech Stack
+
+- Node.js
+- Express
+- MongoDB
+- Socket.io
+- Firebase
+- Amazon EC2
+
 ## :electric_plug: Requirements
 
-- NodeJs
+- Node.JS >= 12.16.2
 - MongoDB
 
-# :zap: Running the Application
-### Getting started the API Restful backend
+## :zap: Running the Application
 
 Clone this repository and install all dependencies.
 
@@ -31,6 +39,7 @@ Start the project running the command bellow:
 ```shell
 $ npm start
 ```
+Start the frontend project [here].(https://github.com/d-klotz/uni-chat)
 
 <hr />
 
