@@ -1,6 +1,6 @@
 <h1 align="center">Group chat NodeJs backend</h1>
 
-### :collision: Tech Stack
+## :collision: Tech Stack
 
 - Node.js
 - Express
@@ -39,7 +39,7 @@ Start the project running the command bellow:
 ```shell
 $ npm start
 ```
-Start the frontend project [here].(https://github.com/d-klotz/uni-chat)
+Start the frontend project [here](https://github.com/d-klotz/uni-chat).
 
 <hr />
 
